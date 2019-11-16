@@ -18,10 +18,10 @@ Install `Jupyter`:
 ipython kernel install --user --name=.venv
 ```
 
-Activate `virtualenv`:
+Activate the `virtualenv`:
 
 ```sh
-source .venv/bin/activate
+source activate
 ```
 
 Run the notebook:
