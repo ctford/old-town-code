@@ -1,26 +1,29 @@
 import csv
 import random
 
-major = set([0, 2, 4, 5, 7, 9, 11])
+samplesPerKey = 200
+keys = {
+  "C": 0,
+  "D": 2,
+  "E": 4,
+  "F": 5,
+  "G": 7,
+  "A": 9,
+  "B": 11
+}
 
-def whiteNote(midi):
-  return midi in major
-
-def key(midi):
-  if midi > 11:
-    return key(midi - 12)
-  if whiteNote(midi):
-    return "C"
+def major(key, rank):
+  if rank > 6:
+    return major(key, rank - 7) + 12
   else:
-    return "B"
+    return keys[key] + [0, 2, 4, 5, 7, 9, 11][rank]
 
-possibleMidis = range(0, 127)
-midis = random.choices(possibleMidis, k=200)
-data = [[key(note), note] for note in midis]
+ranks = random.choices(range(0, 40), k=samplesPerKey)
+notes = [[k, major(k, r)] for k in keys.keys() for r in ranks]
 
 with open('notes.csv', 'w') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerow(["Key", "Midi"])
-    writer.writerows(data)
+    writer.writerows(notes)
 
 csvFile.close()
