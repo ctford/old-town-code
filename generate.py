@@ -1,7 +1,7 @@
 import csv
 import random
 
-samplesPerKey = 200
+samplesPerKey = 10000
 keys = {
   "C": 0,
   "D": 2,
@@ -18,7 +18,7 @@ def major(key, rank):
   else:
     return keys[key] + [0, 2, 4, 5, 7, 9, 11][rank]
 
-ranks = random.choices(range(0, 40), k=samplesPerKey)
+ranks = random.choices(range(0, 56), k=samplesPerKey)
 notes = [[k, major(k, r)] for k in keys.keys() for r in ranks]
 
 with open('notes.csv', 'w') as csvFile:
